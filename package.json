@@ -1,0 +1,23 @@
+{
+  "name": "gatotkaca",
+  "version": "1.0.0",
+  "description": "Indonesia based search engine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rupadana/gatotkaca.git"
+  },
+  "keywords": [
+    "Search",
+    "Engine"
+  ],
+  "author": "Rupadana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rupadana/gatotkaca/issues"
+  },
+  "homepage": "https://github.com/rupadana/gatotkaca#readme"
+}
