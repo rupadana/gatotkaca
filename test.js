@@ -1,39 +1,9 @@
-const puppeteer = require('puppeteer');
-var browser;
 (async () => {
-    browser = await puppeteer.launch({headless: true});
-})()
-
-var cors = require('cors')
-
-const allowedOrigins = ['http://127.0.0.1:5500'];
-const express = require('express')
-const port = 3000
-const app = express()
-
-app.use(cors({
-    origin: function(origin, callback){
-      if(!origin) return callback(null, true);
-      if(allowedOrigins.indexOf(origin) === -1){
-        const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    }
-  
-  }))
-app.get('/search', async (req, res) => {
-    query = req.query.q
-    var data = await search(query);
-    return res.send(data);
-
-})
-
-
-async function search(q) {
+    const browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
     page.on('console', msg => console.log('PAGE LOG:', msg.text()));
-    await page.goto('https://google.com/search?q=' + q);
+    await page.goto('https://google.com/search?q=ngide.net');
+    await page.screenshot({path: 'example.png'});
     const datas = await page.evaluate(() => {
         var datas = [];
         // document.querySelectorAll("#search > div > div > div").map(el => console.log(el.querySelector('div > div > div:first-child > div > a') ? el.querySelector('div > div > div:first-child > div > a').getAttribute('href') : ''))
@@ -53,10 +23,7 @@ async function search(q) {
 
     });
 
-    page.close()
-
-    return datas;
-}
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-  })
+    console.log(datas)
+  
+    await page.close();
+  })();
